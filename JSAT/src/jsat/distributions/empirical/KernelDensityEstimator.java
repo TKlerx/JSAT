@@ -452,6 +452,12 @@ public class KernelDensityEstimator extends Distribution
 		if (Math.abs(Xvar - other.Xvar)>0.00000001) {
 			return false;
 		}
+		//if (Double.doubleToLongBits(Xskew) != Double.doubleToLongBits(other.Xskew)) {
+		//	return false;
+		//}
+		//if (Double.doubleToLongBits(Xvar) != Double.doubleToLongBits(other.Xvar)) {
+		//	return false;
+		//}
 
 		if (Double.doubleToLongBits(h) != Double.doubleToLongBits(other.h)) {
 			return false;
