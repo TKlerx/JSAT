@@ -172,8 +172,7 @@ public class KernelDensityEstimator extends Distribution
     
     @Override
 	public String toString() {
-		return "KernelDensityEstimator [X=" + Arrays.toString(X) + ", weights="
-				+ Arrays.toString(weights) + ", sumOFWeights=" + sumOFWeights
+		return "KernelDensityEstimator [sumOFWeights=" + sumOFWeights
 				+ ", h=" + h + ", Xmean=" + Xmean + ", Xvar=" + Xvar
 				+ ", Xskew=" + Xskew + "]";
 	}
