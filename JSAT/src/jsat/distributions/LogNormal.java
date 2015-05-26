@@ -12,7 +12,9 @@ import jsat.text.GreekLetters;
  */
 public class LogNormal extends Distribution
 {
-    double mu;
+
+	private static final long serialVersionUID = -6938582328705527274L;
+	double mu;
     double sig;
 
     public LogNormal()
@@ -141,5 +143,40 @@ public class LogNormal extends Distribution
     {
         return (exp(sig*sig)+2)*sqrt(expm1(sig*sig));
     }
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(mu);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(sig);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		LogNormal other = (LogNormal) obj;
+		if (Double.doubleToLongBits(mu) != Double.doubleToLongBits(other.mu)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(sig) != Double.doubleToLongBits(other.sig)) {
+			return false;
+		}
+		return true;
+	}
     
 }

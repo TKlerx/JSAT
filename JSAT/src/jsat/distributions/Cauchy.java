@@ -10,7 +10,9 @@ import jsat.linear.Vec;
 public final class Cauchy extends Distribution
 {
     
-    private double location;
+
+	private static final long serialVersionUID = -5083645002030551206L;
+	private double location;
     private double scale;
 
     public Cauchy(double x0, double y)
@@ -170,5 +172,40 @@ public final class Cauchy extends Distribution
     {
         return Double.NaN;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(location);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(scale);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Cauchy other = (Cauchy) obj;
+		if (Double.doubleToLongBits(location) != Double
+				.doubleToLongBits(other.location)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(scale) != Double
+				.doubleToLongBits(other.scale)) {
+			return false;
+		}
+		return true;
+	}
     
 }

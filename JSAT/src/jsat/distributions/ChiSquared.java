@@ -2,7 +2,6 @@
 package jsat.distributions;
 
 import jsat.linear.Vec;
-
 import static java.lang.Math.*;
 import static jsat.math.SpecialMath.*;
 
@@ -12,7 +11,9 @@ import static jsat.math.SpecialMath.*;
  */
 public class ChiSquared extends Distribution
 {
-    double df;//Degrees of freedom
+
+	private static final long serialVersionUID = 2446232102260721666L;
+	double df;//Degrees of freedom
 
     public ChiSquared(double df)
     {
@@ -139,5 +140,35 @@ public class ChiSquared extends Distribution
     {
         return sqrt(8/df);
     }
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(df);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		ChiSquared other = (ChiSquared) obj;
+		if (Double.doubleToLongBits(df) != Double.doubleToLongBits(other.df)) {
+			return false;
+		}
+		return true;
+	}
     
 }

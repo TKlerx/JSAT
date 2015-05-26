@@ -14,7 +14,9 @@ import jsat.text.GreekLetters;
  */
 public class Normal extends Distribution
 {
-    private double mean;
+
+	private static final long serialVersionUID = -5298346576152986165L;
+	private double mean;
     private double stndDev;
 
     public Normal()
@@ -191,6 +193,7 @@ public class Normal extends Distribution
          * Algorithum to compute the cdf of the normal distribution for some z score
          */
         double s = x, t = 0, b = x, q = x*x , i = 1;
+        //XXX double comparison
         while(s != t)
             s=(t=s)+(b*=q/(i+=2));
         return 0.5+s*exp(-.5*q-0.91893853320467274178);
@@ -290,5 +293,40 @@ public class Normal extends Distribution
     {
         return 0;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(mean);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(stndDev);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Normal other = (Normal) obj;
+		if (Double.doubleToLongBits(mean) != Double
+				.doubleToLongBits(other.mean)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(stndDev) != Double
+				.doubleToLongBits(other.stndDev)) {
+			return false;
+		}
+		return true;
+	}
     
 }

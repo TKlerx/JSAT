@@ -32,14 +32,14 @@ import jsat.utils.DoubleList;
  * See:<br>
  * <ul>
  * <li>
- * Zhao, P., Hoi, S. C. H., & Jin, R. (2011). <i>Double Updating Online Learning</i>.
+ * Zhao, P., Hoi, S. C. H.,&amp;Jin, R. (2011). <i>Double Updating Online Learning</i>.
  * Journal of Machine Learning Research, 12, 1587–1615. Retrieved from 
  * <a href="http://www.cse.msu.edu/~rongjin/publications/zhao11a.pdf"> here</a>
  * </li>
  * <li>
- * Zhao, P., Hoi, S. C. H., & Jin, R. (2009). <i>DUOL: A Double Updating 
+ * Zhao, P., Hoi, S. C. H.,&amp;Jin, R. (2009). <i>DUOL: A Double Updating 
  * Approach for Online Learning</i>. In Y. Bengio, D. Schuurmans, J. Lafferty, 
- * C. K. I. Williams, & A. Culotta (Eds.), 
+ * C. K. I. Williams,&amp;A. Culotta (Eds.), 
  * Advances in Neural Information Processing Systems 22 (pp. 2259–2267).
  * </li>
  * </ul>
@@ -47,6 +47,8 @@ import jsat.utils.DoubleList;
  */
 public class DUOL extends BaseUpdateableClassifier implements BinaryScoreClassifier, Parameterized
 {
+    private static final long serialVersionUID = -4751569462573287056L;
+    
     /**
      * Kernel trick to use
      */
@@ -84,9 +86,9 @@ public class DUOL extends BaseUpdateableClassifier implements BinaryScoreClassif
     public DUOL(KernelTrick k)
     {
         this.k = k;
-        this.S = S;
-        this.f_s = f_s;
-        this.alphas = alphas;
+        this.S = new ArrayList<Vec>();
+        this.f_s = new DoubleList();
+        this.alphas = new DoubleList();
     }
 
     /**
@@ -103,8 +105,10 @@ public class DUOL extends BaseUpdateableClassifier implements BinaryScoreClassif
                 this.S.add(v.clone());
             this.f_s = new DoubleList(other.f_s);
             this.alphas = new DoubleList(other.alphas);
-            this.accelCache = new DoubleList(other.accelCache);
-            this.kTmp = new DoubleList(other.kTmp);
+            if(other.accelCache != null)
+                this.accelCache = new DoubleList(other.accelCache);
+            if(other.kTmp != null)
+                this.kTmp = new DoubleList(other.kTmp);
         }
         this.rho = other.rho;
         this.C = other.C;

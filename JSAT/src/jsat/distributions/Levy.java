@@ -8,13 +8,15 @@ import jsat.math.SpecialMath;
 /**
  * Implementation of the 
  * <a href="http://en.wikipedia.org/wiki/L%C3%A9vy_distribution">Levy 
- * Distribution <a/>
+ * Distribution </a>
  * 
  * @author Edward Raff
  */
 public class Levy extends Distribution
 {
-    private double location;
+
+	private static final long serialVersionUID = 3132169946527422816L;
+	private double location;
     private double scale;
     private double logScale;
 
@@ -181,5 +183,40 @@ public class Levy extends Distribution
     {
         return Double.NaN;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(location);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(scale);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Levy other = (Levy) obj;
+		if (Double.doubleToLongBits(location) != Double
+				.doubleToLongBits(other.location)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(scale) != Double
+				.doubleToLongBits(other.scale)) {
+			return false;
+		}
+		return true;
+	}
     
 }

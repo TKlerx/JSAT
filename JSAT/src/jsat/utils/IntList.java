@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class IntList extends AbstractList<Integer> implements Serializable
 {
-    private int[] array;
+
+	private static final long serialVersionUID = 8189142393005394477L;
+	private int[] array;
     private int end;
     
     private IntList(int[] array, int end)
@@ -79,10 +81,17 @@ public class IntList extends AbstractList<Integer> implements Serializable
      */
     public void add(int index, int element)
     {
-        boundsCheck(index);
-        enlargeIfNeeded(1);
-        System.arraycopy(array, index, array, index+1, end-index);
-        array[index] = element;
+        if (index == size())//special case, just appending
+        {
+            add(element);
+        }
+        else
+        {
+            boundsCheck(index);
+            enlargeIfNeeded(1);
+            System.arraycopy(array, index, array, index+1, end-index);
+            array[index] = element;
+        }
     }
 
     @Override

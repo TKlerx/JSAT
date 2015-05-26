@@ -19,7 +19,7 @@ import jsat.linear.Vec;
  * space where the dot product between features approximates the RBF Kernel 
  * product. 
  * <br><br>
- * See: Rahimi, A., & Recht, B. (2007). <i>Random Features for Large-Scale 
+ * See: Rahimi, A.,&amp;Recht, B. (2007). <i>Random Features for Large-Scale 
  * Kernel Machines</i>. Neural Information Processing Systems. Retrieved from 
  * <a href="http://seattle.intel-research.net/pubs/rahimi-recht-random-features.pdf">
  * here</a>
@@ -27,7 +27,9 @@ import jsat.linear.Vec;
  */
 public class RFF_RBF implements DataTransform
 {
-    private Matrix transform;
+
+	private static final long serialVersionUID = -3478916020648280477L;
+	private Matrix transform;
     private Vec offsets;
 
     /**
@@ -90,7 +92,11 @@ public class RFF_RBF implements DataTransform
     
     private static class RandomMatrixRFF_RBF extends RandomMatrix
     {
-        private double coef;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 4702514384718636893L;
+		private double coef;
 
         public RandomMatrixRFF_RBF(double coef, int rows, int cols, long seedMult)
         {
@@ -107,6 +113,8 @@ public class RFF_RBF implements DataTransform
     
     private static class RandomVectorRFF_RBF extends RandomVector
     {
+
+        private static final long serialVersionUID = -6132378281909907937L;
 
         public RandomVectorRFF_RBF(int length, long seedMult)
         {
@@ -146,8 +154,8 @@ public class RFF_RBF implements DataTransform
          */
         public RFF_RBFTransformFactory(double sigma, int dimensions, boolean inMemory)
         {
-            this.sigma = sigma;
-            this.dimensions = dimensions;
+            setSigma(sigma);
+            setDimensions(dimensions);
             this.inMemory = inMemory;
         }
 
