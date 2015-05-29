@@ -49,6 +49,7 @@ public class KernelDensityEstimator extends Distribution
     
     private KernelFunction k;
     
+    
     public static double BandwithGuassEstimate(Vec X)
     {
         if(X.length() == 1 )
@@ -116,7 +117,7 @@ public class KernelDensityEstimator extends Distribution
         this.sumOFWeights = sumOfWeights;
         this.weights = Arrays.copyOf(weights, weights.length);
     }
-
+    
     private void setUpX(Vec S)
     {
         Xmean = S.mean();
@@ -169,13 +170,6 @@ public class KernelDensityEstimator extends Distribution
         else
             return weights[i] - weights[i-1];
     }
-    
-    @Override
-	public String toString() {
-		return "KernelDensityEstimator [sumOFWeights=" + sumOFWeights
-				+ ", h=" + h + ", Xmean=" + Xmean + ", Xvar=" + Xvar
-				+ ", Xskew=" + Xskew + "]";
-	}
     
 
     @Override
@@ -256,6 +250,9 @@ public class KernelDensityEstimator extends Distribution
     @SuppressWarnings("unused")
 	private final Function cdfFunc = new Function() {
 
+        /**
+		 * 
+		 */
 		private static final long serialVersionUID = -4100975560125048798L;
 
 		public double f(double... x)
@@ -430,7 +427,6 @@ public class KernelDensityEstimator extends Distribution
 
 	@Override
 	public boolean equals(Object obj) {
-		
 		if (this == obj) {
 			return true;
 		}
@@ -445,18 +441,14 @@ public class KernelDensityEstimator extends Distribution
 				.doubleToLongBits(other.Xmean)) {
 			return false;
 		}
-		if (Math.abs(Xskew - other.Xskew)>0.00000001) {
+		if (Double.doubleToLongBits(Xskew) != Double
+				.doubleToLongBits(other.Xskew)) {
 			return false;
 		}
-		if (Math.abs(Xvar - other.Xvar)>0.00000001) {
+		if (Double.doubleToLongBits(Xvar) != Double
+				.doubleToLongBits(other.Xvar)) {
 			return false;
 		}
-		//if (Double.doubleToLongBits(Xskew) != Double.doubleToLongBits(other.Xskew)) {
-		//	return false;
-		//}
-		//if (Double.doubleToLongBits(Xvar) != Double.doubleToLongBits(other.Xvar)) {
-		//	return false;
-		//}
 
 		if (Double.doubleToLongBits(h) != Double.doubleToLongBits(other.h)) {
 			return false;
